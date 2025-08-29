@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vladislav "Kotleta" - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #00ff41;
+            font-family: 'Exo 2', sans-serif;
+            line-height: 1.6;
+            padding: 40px 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 65, 0.05) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00ff41;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 65, 0.6),
+                0 0 40px rgba(0, 255, 65, 0.3),
+                inset 0 0 20px rgba(0, 255, 65, 0.1);
+            filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.4));
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            border-color: #00ffff;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.8),
+                0 0 60px rgba(0, 255, 255, 0.4),
+                inset 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(0, 255, 65, 0.3) 0%,
+                rgba(0, 255, 65, 0.1) 40%,
+                transparent 70%
+            );
+            filter: blur(8px);
+            z-index: 1;
+            animation: avatarPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes avatarPulse {
+            from {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            to {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .ai-highlight {
+            color: #ff6b35;
+            font-weight: 600;
+            font-family: 'Share Tech Mono', monospace;
+            text-shadow: 0 0 8px rgba(255, 107, 53, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 53, 0.1) 0%, 
+                rgba(255, 107, 53, 0.05) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .ai-highlight:hover {
+            color: #ff8c42;
+            text-shadow: 0 0 12px rgba(255, 107, 53, 0.8);
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 53, 0.2) 0%, 
+                rgba(255, 107, 53, 0.1) 100%);
+            border-color: rgba(255, 107, 53, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .company-link {
+            color: #00d4ff;
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 500;
+            text-shadow: 0 0 6px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .company-link:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.7);
+            border-bottom-color: rgba(0, 212, 255, 0.6);
+            transform: translateY(-1px);
+        }
+
+        h1 {
+            color: #00ff41;
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 
+                0 0 10px rgba(0, 255, 65, 0.8),
+                0 0 20px rgba(0, 255, 65, 0.4),
+                0 0 30px rgba(0, 255, 65, 0.2);
+            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 
+                    0 0 10px rgba(0, 255, 65, 0.8),
+                    0 0 20px rgba(0, 255, 65, 0.4),
+                    0 0 30px rgba(0, 255, 65, 0.2);
+            }
+            to {
+                text-shadow: 
+                    0 0 15px rgba(0, 255, 65, 1),
+                    0 0 25px rgba(0, 255, 65, 0.6),
+                    0 0 35px rgba(0, 255, 65, 0.4);
+            }
+        }
+
+        h2 {
+            color: #8a2be2;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 30px 0 15px 0;
+            border-bottom: 2px solid #8a2be2;
+            padding-bottom: 5px;
+            text-shadow: 0 0 8px rgba(138, 43, 226, 0.6);
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            color: #9370db;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin: 20px 0 10px 0;
+            text-shadow: 0 0 5px rgba(147, 112, 219, 0.5);
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, 
+                rgba(0, 255, 65, 0.05) 0%, 
+                rgba(138, 43, 226, 0.05) 50%, 
+                rgba(0, 255, 65, 0.05) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 65, 0.1),
+                inset 0 0 20px rgba(0, 255, 65, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 255, 65, 0.1), 
+                transparent);
+            transition: left 0.5s;
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        .section:first-child {
+            background: linear-gradient(135deg, 
+                rgba(0, 255, 65, 0.1) 0%, 
+                rgba(138, 43, 226, 0.1) 100%);
+            border-color: rgba(0, 255, 65, 0.4);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 65, 0.2),
+                inset 0 0 30px rgba(0, 255, 65, 0.1);
+        }
+
+        strong {
+            color: #00ff41;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 600;
+        }
+
+        a {
+            color: #9370db;
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        a:hover {
+            color: #00ff41;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00ff41;
+            transition: width 0.3s ease;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        em {
+            color: #8a2be2;
+            font-style: italic;
+            font-family: 'Share Tech Mono', monospace;
+            text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #00ff41;
+            font-family: 'Exo 2', sans-serif;
+            position: relative;
+        }
+
+        li::before {
+            content: '>';
+            color: #8a2be2;
+            font-family: 'Share Tech Mono', monospace;
+            margin-right: 8px;
+            text-shadow: 0 0 5px rgba(138, 43, 226, 0.6);
+        }
+
+        p {
+            color: #00ff41;
+            margin-bottom: 15px;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+            color: #666666;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* Matrix rain effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .header-container {
+                gap: 20px;
+                flex-direction: column;
+            }
+            
+            .avatar-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+
+        /* Terminal-style cursor effect */
+        .terminal-cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <div class="avatar-container">
+                <img src="img/avatar.jpg" alt="Avatar" class="avatar">
+                <div class="avatar-glow"></div>
+            </div>
+            <h1>Crypto Kotleta<span class="terminal-cursor">_</span></h1>
+        </div>
+
+        <div class="section">
+            <strong>Name:</strong> Vladislav<br>
+            <strong>Telegram:</strong> <a href="https://t.me/GranatoviyFresh">t.me/GranatoviyFresh</a><br>
+            <strong>X (Twitter):</strong> <a href="https://x.com/Crypto_Kotleta">x.com/Crypto_Kotleta</a><br>
+            <strong>Telegram Channel:</strong> <a href="https://t.me/CryptoKotletaChannel">t.me/CryptoKotletaChannel</a>
+        </div>
+
+        <div class="section">
+            <h2>Profile</h2>
+            <p>Passionate cryptocurrency enthusiast and experienced community manager with extensive knowledge in blockchain ecosystems, particularly TON. Proven track record in managing communities, participating in blockchain events, and founding successful projects.</p>
+            <p>Early adopter and active user of artificial intelligence technologies, with hands-on experience in neural networks and AI-powered tools. Since the launch of <span class="ai-highlight">ChatGPT</span>, I have been actively leveraging AI solutions for productivity and innovation. Experienced with workflow automation platforms like <span class="ai-highlight">N8N</span> and proficient in modern AI-assisted development environments, including <span class="ai-highlight">Cursor</span>, which I have been actively utilizing for the past several months to enhance development workflows and project management.</p>
+        </div>
+
+        <div class="section">
+            <h2>Professional Experience</h2>
+
+            <h3>Founder & CEO | <a href="https://boltfather.com" class="company-link">BoltFather.com</a> </h3>
+            <em>2023 – Present</em>
+            <ul>
+                <li>Developed and launched BoltFather, a bot-based crypto-community management platform.</li>
+                <li>Successfully attracted early investment and continually expanding the project's reach and functionality.</li>
+            </ul>
+
+            <h3>Community Manager & Ambassador | <a href="https://dedust.io" class="company-link">DeDust.io</a></h3>
+            <em>2023 – 2025</em>
+            <ul>
+                <li>Played a role in building and managing the community, significantly aiding project growth.</li>
+                <li>Engaged actively with users, fostering community loyalty and user retention.</li>
+            </ul>
+
+            <h3>Community Manager | Bolt Ecosystem</h3>
+            <em>2022 – 2023</em>
+            <ul>
+                <li>Contributed actively to the growth of Bolt Ecosystem, enhancing community engagement and expanding project visibility.</li>
+            </ul>
+
+            <h3>Blockchain Researcher & Retrodrops Hunter | CryptoSale</h3>
+            <em>2022 – 2023</em>
+            <ul>
+                <li>Deeply learning and testing Ethereum & L2 solutions, Solana, Gnosis, Cardano, and other blockchain ecosystems.</li>
+                <li>Earned $3,000 USDT from Arbitrum retrodrops through strategic participation.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Earlier Career</h2>
+
+            <h3>Tower Crane Operator | Prague, Czech Republic</h3>
+            <em>2019 – 2020</em>
+
+            <h3>Director / Cable Operator | MillionaireWakePark</h3>
+            <em>2015 – 2021</em>
+            <ul>
+                <li>Managed operations, progressing from cable operator to park director.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <p><strong>Krivyi Rih College of National Aviation University (KKNAU)</strong><br>
+            <em>2014 – 2017</em><br>
+            Specialization: Maintenance of Computer Systems and Networks</p>
+        </div>
+
+        <div class="section">
+            <h2>Events & Speaking</h2>
+            <p><strong>Speaker & Mentor | TON Society Events, Kyiv</strong><br>
+            <em>2024</em></p>
+            <ul>
+                <li>Invited as an honored guest, speaker, and mentor at all four major events.</li>
+                <li>Recognized contributor to the development and promotion of the TON blockchain community.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Hobbies & Interests</h2>
+            <ul>
+                <li>Cycling</li>
+                <li>Gym & Fitness</li>
+                <li>Brazilian Jiu-Jitsu (Blue belt)</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p><em>References available upon request.</em></p>
+        </footer>
+    </div>
+</body>
+</html>
