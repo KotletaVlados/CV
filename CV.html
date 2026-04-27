@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vladislav "Kotleta" - Resume</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Vladislav Alexenko — AI Agent Builder</title>
+
+    <!-- Шрифты грузим асинхронно, не блокируют рендер -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&family=Share+Tech+Mono&display=swap"
+            rel="stylesheet">
+    </noscript>
+
     <style>
+        :root {
+            --bg-color: #080810;
+            --surface-color: rgba(18, 18, 28, 0.92);
+            --surface-hover: rgba(28, 28, 42, 0.96);
+            --border-color: rgba(255, 255, 255, 0.08);
+
+            --text-primary: #f0f0f0;
+            --text-secondary: #9090a8;
+
+            --accent-green: #00ff41;
+            --accent-purple: #9d4edd;
+            --accent-cyan: #00f5ff;
+            --accent-orange: #ff7b00;
+
+            --transition: all 0.25s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,36 +42,102 @@
         }
 
         body {
-            background-color: #000000;
-            color: #00ff41;
-            font-family: 'Exo 2', sans-serif;
+            background-color: var(--bg-color);
+            /* Статичный градиент вместо анимации — без нагрузки на GPU */
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(157, 78, 221, 0.07) 0%, transparent 45%),
+                radial-gradient(circle at 85% 30%, rgba(0, 245, 255, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(0, 255, 65, 0.04) 0%, transparent 45%);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            padding: 40px 0;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 255, 65, 0.05) 0%, transparent 50%);
+            overflow-x: hidden;
         }
 
+        /* Layout */
         .container {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 60px;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 28px;
         }
 
-        .header-container {
+        /* Панели — без backdrop-filter, это главный тормоз на старом железе */
+        .glass-panel {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', system-ui, sans-serif;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            gap: 10px;
+            color: #fff;
         }
 
-        .avatar-container {
+        h2::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 22px;
+            border-radius: 3px;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+            flex-shrink: 0;
+        }
+
+        a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        /* --- Сайдбар --- */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+        }
+
+        /* Профиль */
+        .profile {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-wrapper {
             position: relative;
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
+            margin-bottom: 18px;
         }
 
         .avatar {
@@ -50,415 +145,661 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #00ff41;
-            box-shadow: 
-                0 0 20px rgba(0, 255, 65, 0.6),
-                0 0 40px rgba(0, 255, 65, 0.3),
-                inset 0 0 20px rgba(0, 255, 65, 0.1);
-            filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.4));
-            transition: all 0.3s ease;
+            border: 2px solid var(--accent-purple);
             position: relative;
             z-index: 2;
+            transition: transform 0.3s ease;
         }
 
-        .avatar:hover {
-            transform: scale(1.05);
-            border-color: #00ffff;
-            box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.8),
-                0 0 60px rgba(0, 255, 255, 0.4),
-                inset 0 0 30px rgba(0, 255, 255, 0.2);
+        .avatar-wrapper:hover .avatar {
+            transform: scale(1.04);
         }
 
+        /* Упрощённый ореол — без spin-анимации */
         .avatar-glow {
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 112%;
+            height: 112%;
             border-radius: 50%;
-            background: radial-gradient(
-                circle,
-                rgba(0, 255, 65, 0.3) 0%,
-                rgba(0, 255, 65, 0.1) 40%,
-                transparent 70%
-            );
-            filter: blur(8px);
+            background: conic-gradient(from 0deg, var(--accent-purple), var(--accent-cyan), var(--accent-green), var(--accent-purple));
+            filter: blur(14px);
+            opacity: 0.5;
             z-index: 1;
-            animation: avatarPulse 3s ease-in-out infinite alternate;
         }
 
-        @keyframes avatarPulse {
-            from {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            to {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-        }
-
-        .ai-highlight {
-            color: #ff6b35;
-            font-weight: 600;
-            font-family: 'Share Tech Mono', monospace;
-            text-shadow: 0 0 8px rgba(255, 107, 53, 0.6);
-            padding: 2px 6px;
-            border-radius: 4px;
-            background: linear-gradient(135deg, 
-                rgba(255, 107, 53, 0.1) 0%, 
-                rgba(255, 107, 53, 0.05) 100%);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .ai-highlight:hover {
-            color: #ff8c42;
-            text-shadow: 0 0 12px rgba(255, 107, 53, 0.8);
-            background: linear-gradient(135deg, 
-                rgba(255, 107, 53, 0.2) 0%, 
-                rgba(255, 107, 53, 0.1) 100%);
-            border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-1px);
-        }
-
-        .company-link {
-            color: #00d4ff;
-            text-decoration: none;
-            font-family: 'Share Tech Mono', monospace;
-            font-weight: 500;
-            text-shadow: 0 0 6px rgba(0, 212, 255, 0.4);
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        .company-link:hover {
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.7);
-            border-bottom-color: rgba(0, 212, 255, 0.6);
-            transform: translateY(-1px);
-        }
-
-        h1 {
-            color: #00ff41;
-            font-family: 'Orbitron', monospace;
-            font-size: 2.8rem;
+        .name {
+            font-size: 1.85rem;
             font-weight: 900;
-            margin-bottom: 30px;
-            text-align: center;
-            text-shadow: 
-                0 0 10px rgba(0, 255, 65, 0.8),
-                0 0 20px rgba(0, 255, 65, 0.4),
-                0 0 30px rgba(0, 255, 65, 0.2);
-            letter-spacing: 3px;
-            animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            background: linear-gradient(90deg, #fff 40%, #b8b8d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 
-                    0 0 10px rgba(0, 255, 65, 0.8),
-                    0 0 20px rgba(0, 255, 65, 0.4),
-                    0 0 30px rgba(0, 255, 65, 0.2);
-            }
-            to {
-                text-shadow: 
-                    0 0 15px rgba(0, 255, 65, 1),
-                    0 0 25px rgba(0, 255, 65, 0.6),
-                    0 0 35px rgba(0, 255, 65, 0.4);
-            }
+        .role-tag {
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            color: var(--accent-green);
+            font-size: 0.88rem;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.35);
         }
 
-        h2 {
-            color: #8a2be2;
-            font-family: 'Orbitron', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 30px 0 15px 0;
-            border-bottom: 2px solid #8a2be2;
-            padding-bottom: 5px;
-            text-shadow: 0 0 8px rgba(138, 43, 226, 0.6);
-            letter-spacing: 1px;
-        }
-
-        h3 {
-            color: #9370db;
+        .role-sub {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            margin-top: -8px;
+            margin-bottom: 4px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.3rem;
-            font-weight: 400;
-            margin: 20px 0 10px 0;
-            text-shadow: 0 0 5px rgba(147, 112, 219, 0.5);
         }
 
-        .section {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, 
-                rgba(0, 255, 65, 0.05) 0%, 
-                rgba(138, 43, 226, 0.05) 50%, 
-                rgba(0, 255, 65, 0.05) 100%);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            box-shadow: 
-                0 0 20px rgba(0, 255, 65, 0.1),
-                inset 0 0 20px rgba(0, 255, 65, 0.05);
+        /* Контакты */
+        .contact-list {
+            list-style: none;
+            width: 100%;
+            text-align: left;
+            margin-top: 14px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 14px;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* Теги */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            padding: 5px 11px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            color: var(--text-primary);
+            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+        }
+
+        .tag:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+            transform: translateY(-1px);
+        }
+
+        .tag-ai {
+            border-color: rgba(0, 245, 255, 0.25);
+            color: var(--accent-cyan);
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+        }
+
+        .lang-level {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* --- Главный контент --- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        /* About */
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 14px;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-text strong {
+            color: #fff;
+        }
+
+        .hl-blue { color: var(--accent-cyan); }
+        .hl-green { color: var(--accent-green); }
+        .hl-purple { color: var(--accent-purple); }
+
+        .ai-chip {
+            display: inline-block;
+            color: var(--accent-orange);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9em;
+            padding: 0 6px;
+            border-radius: 4px;
+            background: rgba(255, 123, 0, 0.1);
+            border: 1px solid rgba(255, 123, 0, 0.22);
+        }
+
+        .ai-chip.blue {
+            color: var(--accent-cyan);
+            background: rgba(0, 245, 255, 0.08);
+            border-color: rgba(0, 245, 255, 0.2);
+        }
+
+        /* Timeline */
+        .timeline {
             position: relative;
-            overflow: hidden;
+            padding-left: 28px;
         }
 
-        .section::before {
+        .timeline::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(0, 255, 65, 0.1), 
-                transparent);
-            transition: left 0.5s;
+            left: 6px;
+            top: 5px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-purple), rgba(157, 78, 221, 0.08));
+            border-radius: 2px;
         }
 
-        .section:hover::before {
-            left: 100%;
+        .timeline-item {
+            position: relative;
+            margin-bottom: 28px;
         }
 
-        .section:first-child {
-            background: linear-gradient(135deg, 
-                rgba(0, 255, 65, 0.1) 0%, 
-                rgba(138, 43, 226, 0.1) 100%);
-            border-color: rgba(0, 255, 65, 0.4);
-            box-shadow: 
-                0 0 30px rgba(0, 255, 65, 0.2),
-                inset 0 0 30px rgba(0, 255, 65, 0.1);
+        .timeline-item:last-child {
+            margin-bottom: 0;
         }
 
-        strong {
-            color: #00ff41;
-            font-family: 'Share Tech Mono', monospace;
+        .timeline-dot {
+            position: absolute;
+            left: -28px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 2px solid var(--accent-purple);
+            box-shadow: 0 0 8px rgba(157, 78, 221, 0.4);
+            z-index: 2;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: var(--accent-purple);
+            box-shadow: 0 0 12px var(--accent-purple);
+            transform: scale(1.2);
+        }
+
+        .timeline-dot.cyan {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 8px rgba(0, 245, 255, 0.4);
+        }
+
+        .timeline-item:hover .timeline-dot.cyan {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan);
+        }
+
+        .timeline-dot.green {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+        }
+
+        .timeline-item:hover .timeline-dot.green {
+            background: var(--accent-green);
+            box-shadow: 0 0 12px var(--accent-green);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 7px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .job-title {
+            font-size: 1.15rem;
+            color: #fff;
             font-weight: 600;
         }
 
-        a {
-            color: #9370db;
-            text-decoration: none;
+        .job-company {
+            color: var(--accent-cyan);
             font-family: 'Share Tech Mono', monospace;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .job-date {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            white-space: nowrap;
+        }
+
+        .timeline-content {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+        }
+
+        .timeline-content ul {
+            margin-left: 18px;
+            margin-top: 8px;
+            list-style-type: none;
+        }
+
+        .timeline-content li {
             position: relative;
+            margin-bottom: 7px;
         }
 
-        a:hover {
-            color: #00ff41;
-            text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
-        }
-
-        a::after {
-            content: '';
+        .timeline-content li::before {
+            content: '▹';
             position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -2px;
-            left: 0;
-            background-color: #00ff41;
-            transition: width 0.3s ease;
+            left: -16px;
+            color: var(--accent-purple);
         }
 
-        a:hover::after {
-            width: 100%;
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 4px;
         }
 
-        em {
-            color: #8a2be2;
-            font-style: italic;
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 18px;
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 245, 255, 0.04);
+            transform: translateY(-3px);
+            color: inherit;
+        }
+
+        .project-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .project-card-title .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 6px var(--accent-cyan);
+            flex-shrink: 0;
+        }
+
+        .project-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .project-card-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.8rem;
             font-family: 'Share Tech Mono', monospace;
-            text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+            color: var(--accent-cyan);
+            opacity: 0.7;
         }
 
-        ul {
-            margin-left: 20px;
-            margin-top: 10px;
+        .project-card:hover .project-card-link {
+            opacity: 1;
         }
 
-        li {
-            margin-bottom: 8px;
-            color: #00ff41;
-            font-family: 'Exo 2', sans-serif;
-            position: relative;
-        }
-
-        li::before {
-            content: '>';
-            color: #8a2be2;
-            font-family: 'Share Tech Mono', monospace;
-            margin-right: 8px;
-            text-shadow: 0 0 5px rgba(138, 43, 226, 0.6);
-        }
-
-        p {
-            color: #00ff41;
-            margin-bottom: 15px;
-            font-family: 'Exo 2', sans-serif;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid rgba(0, 255, 65, 0.3);
-            color: #666666;
-            font-family: 'Share Tech Mono', monospace;
-        }
-
-        /* Matrix rain effect */
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        @media (max-width: 768px) {
+        /* Responsive */
+        @media (max-width: 900px) {
             .container {
-                padding: 0 20px;
+                grid-template-columns: 1fr;
             }
-            
-            .header-container {
-                gap: 20px;
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px 14px;
+            }
+            .timeline-header {
                 flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
             }
-            
-            .avatar-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .section {
-                padding: 20px;
+            .glass-panel {
+                padding: 18px;
             }
         }
 
-        /* Terminal-style cursor effect */
-        .terminal-cursor {
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+        /* Пользователи, которые просят меньше анимаций — уважаем */
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; animation: none !important; }
         }
     </style>
 </head>
+
 <body>
+
     <div class="container">
-        <div class="header-container">
-            <div class="avatar-container">
-                <img src="img/avatar.jpg" alt="Avatar" class="avatar">
-                <div class="avatar-glow"></div>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="glass-panel profile">
+                <div class="avatar-wrapper">
+                    <img src="img/avatar.jpg" alt="Vladislav Alexenko" class="avatar"
+                        onerror="this.src='https://ui-avatars.com/api/?name=VA&background=0D0D1A&color=00f5ff&size=200'">
+                    <div class="avatar-glow"></div>
+                </div>
+                <h1 class="name">Vladislav A.</h1>
+                <div class="role-tag">&gt; AI Agent Builder</div>
+                <div class="role-sub">& Technical Support Specialist</div>
+
+                <ul class="contact-list">
+                    <li><span class="contact-icon">📍</span> Kriviy Rih, Ukraine</li>
+                    <li><span class="contact-icon">✉️</span>
+                        <a href="mailto:vladalexenko@gmail.com">vladalexenko@gmail.com</a>
+                    </li>
+                    <li><span class="contact-icon">✈️</span>
+                        <a href="https://t.me/GranatoviyFresh" target="_blank">t.me/GranatoviyFresh</a>
+                    </li>
+                    <li><span class="contact-icon">🐦</span>
+                        <a href="https://x.com/Crypto_Kotleta" target="_blank">x.com/Crypto_Kotleta</a>
+                    </li>
+                    <li><span class="contact-icon">🌐</span>
+                        <a href="https://metalk.tech" target="_blank">metalk.tech</a>
+                    </li>
+                </ul>
             </div>
-            <h1>Crypto Kotleta<span class="terminal-cursor">_</span></h1>
-        </div>
 
-        <div class="section">
-            <strong>Name:</strong> Vladislav<br>
-            <strong>Telegram:</strong> <a href="https://t.me/GranatoviyFresh">t.me/GranatoviyFresh</a><br>
-            <strong>X (Twitter):</strong> <a href="https://x.com/Crypto_Kotleta">x.com/Crypto_Kotleta</a><br>
-            <strong>Telegram Channel:</strong> <a href="https://t.me/CryptoKotletaChannel">t.me/CryptoKotletaChannel</a>
-        </div>
+            <div class="glass-panel">
+                <h2>Core Skills</h2>
+                <div class="tags">
+                    <span class="tag">AI Agent Development</span>
+                    <span class="tag">Workflow Automation</span>
+                    <span class="tag">Prompt Engineering</span>
+                    <span class="tag">Technical Support</span>
+                    <span class="tag">Web3 & Crypto</span>
+                    <span class="tag">Community Building</span>
+                </div>
+            </div>
 
-        <div class="section">
-            <h2>Profile</h2>
-            <p>Passionate cryptocurrency enthusiast and experienced community manager with extensive knowledge in blockchain ecosystems, particularly TON. Proven track record in managing communities, participating in blockchain events, and founding successful projects.</p>
-            <p>Early adopter and active user of artificial intelligence technologies, with hands-on experience in neural networks and AI-powered tools. Since the launch of <span class="ai-highlight">ChatGPT</span>, I have been actively leveraging AI solutions for productivity and innovation. Experienced with workflow automation platforms like <span class="ai-highlight">N8N</span> and proficient in modern AI-assisted development environments, including <span class="ai-highlight">Cursor</span>, which I have been actively utilizing for the past several months to enhance development workflows and project management.</p>
-        </div>
+            <div class="glass-panel">
+                <h2>AI & Tech Stack</h2>
+                <div class="tags">
+                    <span class="tag tag-ai">Claude (Anthropic)</span>
+                    <span class="tag tag-ai">Claude Code</span>
+                    <span class="tag tag-ai">ChatGPT / Codex</span>
+                    <span class="tag tag-ai">Cursor IDE</span>
+                    <span class="tag tag-ai">N8N Automation</span>
+                    <span class="tag">Figma</span>
+                    <span class="tag">Next.js</span>
+                    <span class="tag">FastAPI</span>
+                </div>
+            </div>
 
-        <div class="section">
-            <h2>Professional Experience</h2>
+            <div class="glass-panel">
+                <h2>Languages</h2>
+                <div class="language-item">
+                    <span>Ukrainian</span>
+                    <span class="lang-level">Native</span>
+                </div>
+                <div class="language-item">
+                    <span>Russian</span>
+                    <span class="lang-level">Native</span>
+                </div>
+                <div class="language-item">
+                    <span>English</span>
+                    <span class="lang-level">Intermediate</span>
+                </div>
+            </div>
 
-            <h3>Founder & CEO | <a href="https://boltfather.com" class="company-link">BoltFather.com</a> </h3>
-            <em>2023 – Present</em>
-            <ul>
-                <li>Developed and launched BoltFather, a bot-based crypto-community management platform.</li>
-                <li>Successfully attracted early investment and continually expanding the project's reach and functionality.</li>
-            </ul>
+            <div class="glass-panel">
+                <h2>Hobbies</h2>
+                <div class="tags">
+                    <span class="tag">Cycling</span>
+                    <span class="tag">Gym & Fitness</span>
+                    <span class="tag">BJJ (Blue belt)</span>
+                </div>
+            </div>
+        </aside>
 
-            <h3>Community Manager & Ambassador | <a href="https://dedust.io" class="company-link">DeDust.io</a></h3>
-            <em>2023 – 2025</em>
-            <ul>
-                <li>Played a role in building and managing the community, significantly aiding project growth.</li>
-                <li>Engaged actively with users, fostering community loyalty and user retention.</li>
-            </ul>
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
 
-            <h3>Community Manager | Bolt Ecosystem</h3>
-            <em>2022 – 2023</em>
-            <ul>
-                <li>Contributed actively to the growth of Bolt Ecosystem, enhancing community engagement and expanding project visibility.</li>
-            </ul>
+            <div class="glass-panel">
+                <h2>About Me</h2>
+                <div class="about-text">
+                    <p>
+                        By day — <strong>Technical Support Specialist</strong> ensuring seamless operations and
+                        resolving complex user challenges. By evening — a <span class="hl-green">vibe coder</span>
+                        and <strong>AI agent builder</strong>, turning ideas into working products with modern
+                        <span class="hl-blue">LLM tooling</span>.
+                    </p>
+                    <p>
+                        I architect and ship AI-powered solutions end-to-end: from prompt design and agent orchestration
+                        to full-stack web apps. My daily toolkit includes
+                        <span class="ai-chip blue">Claude</span> and <span class="ai-chip blue">Claude Code</span>
+                        for agentic workflows, <span class="ai-chip">Cursor</span> and
+                        <span class="ai-chip">Codex</span> for rapid prototyping,
+                        and <span class="ai-chip">N8N</span> for no-code automation pipelines.
+                        I believe the gap between an idea and a shipped product has never been smaller —
+                        and I exploit that gap daily.
+                    </p>
+                    <p>
+                        On top of that, I bring a deep background in <span class="hl-purple">Web3</span>:
+                        building crypto communities, researching L2 ecosystems, and running early-stage projects
+                        on the TON network. I understand both the technical and social layers of decentralized products.
+                    </p>
+                </div>
+            </div>
 
-            <h3>Blockchain Researcher & Retrodrops Hunter | CryptoSale</h3>
-            <em>2022 – 2023</em>
-            <ul>
-                <li>Deeply learning and testing Ethereum & L2 solutions, Solana, Gnosis, Cardano, and other blockchain ecosystems.</li>
-                <li>Earned $3,000 USDT from Arbitrum retrodrops through strategic participation.</li>
-            </ul>
-        </div>
+            <!-- MY PROJECTS -->
+            <div class="glass-panel">
+                <h2>My Projects</h2>
+                <div class="projects-grid">
+                    <a class="project-card" href="https://boltfather.com" target="_blank">
+                        <div class="project-card-title">
+                            <span class="dot" style="background:var(--accent-purple); box-shadow:0 0 6px var(--accent-purple);"></span>
+                            BoltFather
+                        </div>
+                        <div class="project-card-desc">
+                            Bot-based crypto-community management platform. From concept to launch — attracted
+                            early-stage investment and shipped on the TON ecosystem.
+                        </div>
+                        <span class="project-card-link">→ boltfather.com</span>
+                    </a>
+                    <a class="project-card" href="https://metalk.tech" target="_blank">
+                        <div class="project-card-title">
+                            <span class="dot"></span>
+                            MeTalk
+                        </div>
+                        <div class="project-card-desc">
+                            AI-powered communication tool built with modern LLM stack. Designed, developed,
+                            and deployed solo — a showcase of vibe coding at its best.
+                        </div>
+                        <span class="project-card-link">→ metalk.tech</span>
+                    </a>
+                </div>
+            </div>
 
-        <div class="section">
-            <h2>Earlier Career</h2>
+            <div class="glass-panel">
+                <h2>Experience</h2>
+                <div class="timeline">
 
-            <h3>Tower Crane Operator | Prague, Czech Republic</h3>
-            <em>2019 – 2020</em>
+                    <div class="timeline-item">
+                        <div class="timeline-dot green"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <span class="job-title">Technical Support Specialist</span>
+                                <span class="job-company">| Current Role</span>
+                            </div>
+                            <span class="job-date">2021 – Present</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul>
+                                <li>First-line and escalation technical support; resolving complex user and system issues.</li>
+                                <li>Integrating AI tools into daily workflows — reducing resolution time and automating routine tasks.</li>
+                                <li>Building internal automation with N8N and LLM-based assistants alongside core support duties.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <h3>Director / Cable Operator | MillionaireWakePark</h3>
-            <em>2015 – 2021</em>
-            <ul>
-                <li>Managed operations, progressing from cable operator to park director.</li>
-            </ul>
-        </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <span class="job-title">Founder & CEO</span>
+                                <span class="job-company">| <a href="https://boltfather.com" target="_blank">BoltFather.com</a></span>
+                            </div>
+                            <span class="job-date">2023 – Present</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul>
+                                <li>Conceptualized, developed, and launched BoltFather — a bot-based crypto-community management platform.</li>
+                                <li>Attracted early-stage investment; navigated roadmap and feature expansion independently.</li>
+                                <li>Built with AI-assisted development stack: Cursor, Claude, N8N for rapid prototyping and iteration.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-        <div class="section">
-            <h2>Education</h2>
-            <p><strong>Krivyi Rih College of National Aviation University (KKNAU)</strong><br>
-            <em>2014 – 2017</em><br>
-            Specialization: Maintenance of Computer Systems and Networks</p>
-        </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <span class="job-title">Community Manager & Ambassador</span>
+                                <span class="job-company">| <a href="https://dedust.io" target="_blank">DeDust.io</a></span>
+                            </div>
+                            <span class="job-date">2023 – 2025</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul>
+                                <li>Built, moderated, and scaled the project's community on the TON network.</li>
+                                <li>Front-line support: educated users on platform features, resolved technical inquiries.</li>
+                                <li>Fostered user retention through active engagement and structured feedback collection.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-        <div class="section">
-            <h2>Events & Speaking</h2>
-            <p><strong>Speaker & Mentor | TON Society Events, Kyiv</strong><br>
-            <em>2024</em></p>
-            <ul>
-                <li>Invited as an honored guest, speaker, and mentor at all four major events.</li>
-                <li>Recognized contributor to the development and promotion of the TON blockchain community.</li>
-            </ul>
-        </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <span class="job-title">Blockchain Researcher & Retro-hunter</span>
+                                <span class="job-company">| CryptoSale</span>
+                            </div>
+                            <span class="job-date">2022 – 2023</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul>
+                                <li>Deep-dive research and testing of Ethereum L2s, Solana, Gnosis, and Cardano ecosystems.</li>
+                                <li>Strategic early network participation — earned $3,000 USDT from Arbitrum retrodrops.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="section">
-            <h2>Hobbies & Interests</h2>
-            <ul>
-                <li>Cycling</li>
-                <li>Gym & Fitness</li>
-                <li>Brazilian Jiu-Jitsu (Blue belt)</li>
-            </ul>
-        </div>
+            <div class="glass-panel">
+                <h2>Education & Speaking</h2>
+                <div class="timeline">
 
-        <footer>
-            <p><em>References available upon request.</em></p>
-        </footer>
+                    <div class="timeline-item">
+                        <div class="timeline-dot cyan"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <span class="job-title">Speaker & Mentor</span>
+                                <span class="job-company">| TON Society Events, Kyiv</span>
+                            </div>
+                            <span class="job-date">2024</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul>
+                                <li>Invited speaker at four major blockchain events in Ukraine.</li>
+                                <li>Recognized contributor to the TON blockchain community development.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot cyan"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <span class="job-title">Computer Systems and Networks</span>
+                                <span class="job-company">| KKNAU</span>
+                            </div>
+                            <span class="job-date">2014 – 2017</span>
+                        </div>
+                        <div class="timeline-content">
+                            <ul>
+                                <li>Krivyi Rih College of National Aviation University. Foundational knowledge in hardware,
+                                    networking, and systems administration.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="text-align:center; color:var(--text-secondary); font-size:0.82rem; margin-top:6px; padding-bottom:10px;">
+                * Earlier career includes management roles as Director / Cable Operator at MillionaireWakePark (2015–2021).
+            </div>
+
+        </main>
     </div>
+
 </body>
 </html>
